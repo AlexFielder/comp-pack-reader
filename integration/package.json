@@ -1,0 +1,9 @@
+{
+  "name": "comp-pack-reader-integration",
+  "version": "0.0.0",
+  "private": true,
+  "publisher": "afautomations",
+  "engines": { "vscode": "^1.95.0" },
+  "main": "./noop.js",
+  "activationEvents": []
+}

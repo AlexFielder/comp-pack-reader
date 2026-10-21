@@ -1,0 +1,7 @@
+node_modules/
+out/
+*.vsix
+integration/result.txt
+integration/stdout.txt
+integration/stderr.txt
+integration/preview.html

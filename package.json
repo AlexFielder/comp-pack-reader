@@ -1,0 +1,93 @@
+{
+  "name": "comp-pack-reader",
+  "displayName": "Comp Pack Reader",
+  "description": "Click through from a comprehension pack's code references (links or `path:line` code spans) to the file and line, with hover previews and a check for broken references.",
+  "version": "0.1.0",
+  "publisher": "afautomations",
+  "private": true,
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "markdown",
+    "comprehension pack",
+    "code references",
+    "documentation"
+  ],
+  "activationEvents": [
+    "onLanguage:markdown"
+  ],
+  "main": "./out/src/extension.js",
+  "contributes": {
+    "markdown.markdownItPlugins": true,
+    "commands": [
+      {
+        "command": "compPackReader.openReference",
+        "title": "Comp Pack: Open Reference"
+      },
+      {
+        "command": "compPackReader.checkReferences",
+        "title": "Comp Pack: Check References in This File"
+      }
+    ],
+    "configuration": {
+      "title": "Comp Pack Reader",
+      "properties": {
+        "compPackReader.documentGlobs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "**/docs/comprehension/**/*.md"
+          ],
+          "description": "Markdown files the reader treats as comprehension packs. Add \"**/*.md\" to read `path:line` references in every Markdown file."
+        },
+        "compPackReader.excludeDirectories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            ".git",
+            "node_modules",
+            "bin",
+            "obj",
+            ".vs",
+            ".idea",
+            "TestResults",
+            ".claude/worktrees"
+          ],
+          "description": "Folder names (or repository-relative folder paths) skipped when a bare filename is looked up in the repository."
+        },
+        "compPackReader.diagnostics": {
+          "type": "boolean",
+          "default": true,
+          "description": "Report references whose file can't be found, is ambiguous, or whose line is past the end of the file."
+        },
+        "compPackReader.hoverContextLines": {
+          "type": "number",
+          "default": 2,
+          "description": "Extra lines shown above and below the referenced lines in a hover preview."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p .",
+    "watch": "tsc -watch -p .",
+    "test": "tsc -p . && node --test out/test/parser.test.js out/test/resolver.test.js out/test/plugin.test.js",
+    "package": "tsc -p . && vsce package --no-dependencies --skip-license --allow-missing-repository"
+  },
+  "devDependencies": {
+    "@types/markdown-it": "14.1.2",
+    "@types/node": "22.20.5",
+    "@types/vscode": "1.95.0",
+    "@vscode/vsce": "3.9.2",
+    "markdown-it": "14.1.0",
+    "typescript": "6.0.3"
+  }
+}
