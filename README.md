@@ -31,6 +31,8 @@ It works in any repository and has no AFAutomations-specific paths. A pack is an
 
 ## Install
 
+Download `comp-pack-reader-<version>.vsix` from the [releases page](https://github.com/AlexFielder/comp-pack-reader/releases), then:
+
 ```powershell
 code-insiders --install-extension C:\AFAutomations\GitHub\comp-pack-reader\comp-pack-reader-0.1.0.vsix
 ```
@@ -115,7 +117,10 @@ The `comp-pack` skill's `references/reference-format.md` now carries this as con
 
 - **A click in the preview webview:** I checked the rendered HTML and VS Code's click-handling code, but nobody has clicked a link in the preview yet. Do that once by hand.
 - **A click in the Claude desktop app:** the findings above come from reading its bundle. Open a v2 pack in a session started in the repository and click a link to confirm.
-- **A licence:** the package has none yet (`vsce package --skip-license`). Choose one before sharing it outside AFAutomations.
-- **Hosting:** there's no GitHub repository or Marketplace listing yet, and both are your call. Without one, share the `.vsix` file.
+- **Marketplace:** there's no listing. Releases on [GitHub](https://github.com/AlexFielder/comp-pack-reader/releases) carry the `.vsix`, and the repository is private, so only collaborators can download them.
 - **Line drift:** packs pin a commit, but the extension checks lines against the working tree. A check against the pinned commit (with `git show <sha>:<path>`) would catch drift exactly.
 - **Very large repositories:** the index caps at 200,000 entries and is rebuilt after 5 minutes or on file create and delete. Monorepos may want a narrower `excludeDirectories`.
+
+## Licence
+
+Released into the public domain under [the Unlicense](LICENSE).

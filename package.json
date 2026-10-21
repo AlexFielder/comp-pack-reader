@@ -4,6 +4,11 @@
   "description": "Click through from a comprehension pack's code references (links or `path:line` code spans) to the file and line, with hover previews and a check for broken references.",
   "version": "0.1.0",
   "publisher": "afautomations",
+  "license": "Unlicense",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AlexFielder/comp-pack-reader.git"
+  },
   "private": true,
   "engines": {
     "vscode": "^1.95.0"
@@ -80,7 +85,7 @@
     "compile": "tsc -p .",
     "watch": "tsc -watch -p .",
     "test": "tsc -p . && node --test out/test/parser.test.js out/test/resolver.test.js out/test/plugin.test.js",
-    "package": "tsc -p . && vsce package --no-dependencies --skip-license --allow-missing-repository --no-rewrite-relative-links"
+    "package": "tsc -p . && vsce package --no-dependencies --no-rewrite-relative-links"
   },
   "devDependencies": {
     "@types/markdown-it": "14.1.2",
