@@ -80,7 +80,7 @@
     "compile": "tsc -p .",
     "watch": "tsc -watch -p .",
     "test": "tsc -p . && node --test out/test/parser.test.js out/test/resolver.test.js out/test/plugin.test.js",
-    "package": "tsc -p . && vsce package --no-dependencies --skip-license --allow-missing-repository"
+    "package": "tsc -p . && vsce package --no-dependencies --skip-license --allow-missing-repository --no-rewrite-relative-links"
   },
   "devDependencies": {
     "@types/markdown-it": "14.1.2",
