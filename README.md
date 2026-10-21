@@ -101,7 +101,7 @@ The `comp-pack` skill's `references/reference-format.md` now carries this as con
   - **Resolver:** a fixture repository with duplicate filenames, excluded worktrees, folders, abbreviations and absolute paths.
   - **Preview plugin:** run with markdown-it the way VS Code calls it, which is parse without the document, then render twice from the cached tokens.
   - **Datum pack:** when the pack exists on this machine, it must resolve with no missing files. On 2026-10-21 that was 114 references, 0 problems, in its original code-span form.
-- **`integration\run.ps1 [-Pack <pack.md>]`:** installs the packaged `.vsix` into a throwaway VS Code profile, so yours isn't touched. It opens the **parent** of a fixture repository, as when you open `C:\AFAutomations\GitHub`, and checks inside real VS Code that:
+- **`integration\run.ps1 [-Pack <pack.md>] [-Insiders]`:** installs the packaged `.vsix` into a throwaway VS Code profile, so yours isn't touched. It opens the **parent** of a fixture repository, as when you open `C:\AFAutomations\GitHub`, and checks inside real VS Code that:
   - every form opens the right file and selects the right lines;
   - the ambiguous name offers a picker;
   - non-references aren't linked;
