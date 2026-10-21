@@ -1,19 +1,22 @@
 # Installs the packaged .vsix into a throwaway VS Code profile and runs index.js inside that VS Code:
 # a fixture repository with every reference form, then (optionally) a smoke test of a real pack.
 # Your own VS Code profile and extensions are not touched.
-#   .\integration\run.ps1 [-Pack C:\path\to\repo\docs\comprehension\pack.md]
+#   .\integration\run.ps1 [-Pack C:\path\to\repo\docs\comprehension\pack.md] [-Insiders]
 param(
   [string] $Pack,
   [string] $Vsix = (Get-ChildItem "$PSScriptRoot\..\*.vsix" | Sort-Object LastWriteTime | Select-Object -Last 1).FullName,
-  [string] $CodeExe = (Join-Path (Split-Path (Split-Path (Get-Command code).Source)) 'Code.exe')
+  # Test in VS Code - Insiders instead of stable.
+  [switch] $Insiders
 )
 $ErrorActionPreference = 'Stop'
+$cli = if ($Insiders) { 'code-insiders' } else { 'code' }
+$CodeExe = Join-Path (Split-Path (Split-Path (Get-Command $cli).Source)) $(if ($Insiders) { 'Code - Insiders.exe' } else { 'Code.exe' })
 $profileDir = Join-Path ([IO.Path]::GetTempPath()) 'comp-pack-reader-it'
-Get-Process Code -ErrorAction SilentlyContinue | Where-Object { $_.CommandLine -match 'comp-pack-reader-it' } | Stop-Process -Force
+Get-Process 'Code', 'Code - Insiders' -ErrorAction SilentlyContinue | Where-Object { $_.CommandLine -match 'comp-pack-reader-it' } | Stop-Process -Force
 Remove-Item -Recurse -Force $profileDir -ErrorAction SilentlyContinue
 $userData = Join-Path $profileDir 'user'
 $extDir = Join-Path $profileDir 'extensions'
-& code --user-data-dir $userData --extensions-dir $extDir --install-extension $Vsix --force | Out-Host
+& $cli --user-data-dir $userData --extensions-dir $extDir --install-extension $Vsix --force | Out-Host
 
 $env:COMP_PACK = if ($Pack) { (Resolve-Path $Pack).Path } else { '' }
 # VS Code opens the PARENT of the fixture repository, as when a whole GitHub folder is open.

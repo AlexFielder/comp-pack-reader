@@ -32,8 +32,10 @@ It works in any repository and has no AFAutomations-specific paths. A pack is an
 ## Install
 
 ```powershell
-code --install-extension C:\AFAutomations\GitHub\comp-pack-reader\comp-pack-reader-0.1.0.vsix
+code-insiders --install-extension C:\AFAutomations\GitHub\comp-pack-reader\comp-pack-reader-0.1.0.vsix
 ```
+
+Use `code` instead of `code-insiders` for stable VS Code. It needs VS Code 1.95 or later, and passes the integration run in both stable 1.139.1 and Insiders 1.142.0.
 
 To build it yourself: `npm ci --ignore-scripts`, then `npm run package`.
 
